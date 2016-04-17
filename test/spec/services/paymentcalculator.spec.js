@@ -15,9 +15,15 @@ describe('Factory: PaymentCalculator', function () {
 
     describe('calculatePayment with invalid parameters', function () {
 
-        it('should return 0 with 0, 1, or 2 parameters', function () {
+        it('should return 0 with 0 parameters', function () {
             expect(_PaymentCalculator.calculatePayment()).toBe(0);
+        });
+
+        it('should return 0 with 1 parameters', function () {
             expect(_PaymentCalculator.calculatePayment(null)).toBe(0);
+        });
+
+        it('should return 0 with 2 parameters', function () {
             expect(_PaymentCalculator.calculatePayment(null, null)).toBe(0);
         });
     });
