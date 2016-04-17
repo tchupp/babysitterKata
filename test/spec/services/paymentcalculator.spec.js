@@ -27,4 +27,18 @@ describe('Factory: PaymentCalculator', function () {
             expect(_PaymentCalculator.calculatePayment(null, null)).toBe(0);
         });
     });
+
+    describe('calculatePayment with valid parameters', function () {
+        var startTime;
+        var endTime;
+        var bedTime;
+
+        it('should return correct payment', function () {
+            startTime = '17:00';
+            endTime = '1:00';
+            bedTime = '21:00';
+
+            expect(_PaymentCalculator.calculatePayment(startTime, endTime, bedTime)).toBe(88);
+        });
+    });
 });

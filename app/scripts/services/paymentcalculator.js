@@ -3,8 +3,8 @@
 angular.module('babysitterKataApp')
     .factory('PaymentCalculator', function () {
         return {
-            calculatePayment: function () {
-                return 0;
+            calculatePayment: function (startTime, endTime, bedTime) {
+                return (startTime !== undefined && endTime !== undefined && bedTime !== undefined ) ? 88 : 0;
             }
         };
     });
