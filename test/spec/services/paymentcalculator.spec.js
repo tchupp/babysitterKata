@@ -39,6 +39,12 @@ describe('Factory: PaymentCalculator', function () {
             bedTime = '21:00';
 
             expect(_PaymentCalculator.calculatePayment(startTime, endTime, bedTime)).toBe(88);
+
+            startTime = '18:00';
+            endTime = '3:00';
+            bedTime = '20:00';
+
+            expect(_PaymentCalculator.calculatePayment(startTime, endTime, bedTime)).toBe(104);
         });
     });
 });
