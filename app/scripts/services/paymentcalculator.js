@@ -2,5 +2,9 @@
 
 angular.module('babysitterKataApp')
     .factory('PaymentCalculator', function () {
-        return {};
+        return {
+            calculatePayment: function () {
+                return 0;
+            }
+        };
     });
