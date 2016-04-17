@@ -9,7 +9,7 @@ angular.module('babysitterKataApp')
             calculatePayment: function (startTime, endTime, bedTime) {
                 startTime = startTimesAllowed.indexOf(startTime);
                 endTime = endTimesAllowed.indexOf(endTime);
-                bedTime = startTimesAllowed.indexOf(bedTime);
+                bedTime = (startTimesAllowed.indexOf(bedTime) < startTimesAllowed.indexOf('00:00')) ? startTimesAllowed.indexOf(bedTime) : -1;
 
                 if (startTime !== -1 && endTime !== -1 && bedTime !== -1) {
                     var startToBedTime = (bedTime - startTime);

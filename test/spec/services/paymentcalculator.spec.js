@@ -5,6 +5,11 @@ describe('Factory: PaymentCalculator', function () {
     beforeEach(module('babysitterKataApp'));
 
     var _PaymentCalculator;
+
+    var startTime;
+    var endTime;
+    var bedTime;
+
     beforeEach(inject(function (PaymentCalculator) {
         _PaymentCalculator = PaymentCalculator;
     }));
@@ -13,7 +18,7 @@ describe('Factory: PaymentCalculator', function () {
         expect(_PaymentCalculator !== undefined).toBeTruthy();
     });
 
-    describe('calculatePayment with invalid parameters', function () {
+    describe('calculatePayment with invalid number of parameters', function () {
 
         it('should return 0 with 0 parameters', function () {
             expect(_PaymentCalculator.calculatePayment()).toBe(0);
@@ -28,10 +33,44 @@ describe('Factory: PaymentCalculator', function () {
         });
     });
 
+    describe('calculatePayment with invalid times', function () {
+
+        it('should return 0 if start time is before 5pm', function () {
+            startTime = '15:00';
+            endTime = '2:00';
+            bedTime = '22:00';
+
+            expect(_PaymentCalculator.calculatePayment(startTime, endTime, bedTime)).toBe(0);
+
+            startTime = '16:00';
+            expect(_PaymentCalculator.calculatePayment(startTime, endTime, bedTime)).toBe(0);
+        });
+
+        it('should return 0 if end time is after 4am', function () {
+            startTime = '17:00';
+            endTime = '5:00';
+            bedTime = '22:00';
+
+            expect(_PaymentCalculator.calculatePayment(startTime, endTime, bedTime)).toBe(0);
+
+            endTime = '6:00';
+            expect(_PaymentCalculator.calculatePayment(startTime, endTime, bedTime)).toBe(0);
+        });
+
+        it('should return 0 if bed time is midnight or later', function () {
+            startTime = '17:00';
+            endTime = '4:00';
+            bedTime = '00:00';
+
+            expect(_PaymentCalculator.calculatePayment(startTime, endTime, bedTime)).toBe(0);
+
+            bedTime = '1:00';
+            expect(_PaymentCalculator.calculatePayment(startTime, endTime, bedTime)).toBe(0);
+        });
+    });
+
+
     describe('calculatePayment with valid parameters', function () {
-        var startTime;
-        var endTime;
-        var bedTime;
 
         it('should return correct payment', function () {
             startTime = '17:00';
