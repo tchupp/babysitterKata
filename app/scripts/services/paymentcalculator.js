@@ -19,14 +19,17 @@ angular.module('babysitterKataApp')
                 var startToBedTime = (bedTime - startTime);
                 payment += startToBedTime * 12;
 
-                var bedToMidnight = (startTimesAllowed.indexOf('00:00') - bedTime);
-                if (bedToMidnight > 0 && endTime > bedTime) {
-                    payment += bedToMidnight * 8;
-                }
-
                 var midnightToEnd = (endTime - endTimesAllowed.indexOf('00:00'));
                 if (midnightToEnd > 0) {
                     payment += midnightToEnd * 16;
+
+                    var bedToMidnight = (startTimesAllowed.indexOf('00:00') - bedTime);
+                    if (bedToMidnight > 0) {
+                        payment += bedToMidnight * 8;
+                    }
+                } else {
+                    var bedToEndTime = (endTime - bedTime) + 1;
+                    payment += bedToEndTime * 8;
                 }
 
                 return payment;

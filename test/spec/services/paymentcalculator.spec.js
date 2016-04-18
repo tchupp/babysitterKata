@@ -86,19 +86,25 @@ describe('Factory: PaymentCalculator', function () {
             expect(_PaymentCalculator.calculatePayment(startTime, endTime, bedTime)).toBe(104);
         });
 
-        it('should return correct payment for jobs ending on midnight', function () {
+        it('should return correct payment for jobs ending on or before midnight', function () {
             startTime = '17:00';
             endTime = '00:00';
             bedTime = '21:00';
 
             expect(_PaymentCalculator.calculatePayment(startTime, endTime, bedTime)).toBe(72);
+
+            startTime = '18:00';
+            endTime = '20:00';
+            bedTime = '19:00';
+
+            expect(_PaymentCalculator.calculatePayment(startTime, endTime, bedTime)).toBe(20);
         });
 
         it('should return correct payment for edge case jobs', function () {
             startTime = '17:00';
             endTime = '18:00';
             bedTime = '18:00';
-
+            
             expect(_PaymentCalculator.calculatePayment(startTime, endTime, bedTime)).toBe(12);
 
             startTime = '21:00';
